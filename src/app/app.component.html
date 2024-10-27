@@ -1,6 +1,7 @@
 <app-header />
 <main>
   <ul id="users">
+    <!-- Kreiranje Input-a za svaki podatak user-a -->
     <!-- <li>
       <app-user
         [id]="users[0].id"
@@ -34,7 +35,9 @@
       />
     </li>
   </ul> -->
-    <li>
+
+    <!-- Koriscenje user-a kao objekta  -->
+    <!-- <li>
       <app-user [user]="users[0]" (select)="onSelectUser($event)" />
     </li>
     <li>
@@ -46,7 +49,42 @@
     <li>
       <app-user [user]="users[3]" (select)="onSelectUser($event)" />
     </li>
+  </ul> -->
+
+    <!-- Dinamicki prikupljanje podataka -->
+    <!-- track cuva unique svojstvo za svaki list item -->
+
+    <!-- Ovo postoji od verzije 17-->
+
+    <!-- kako bi dodali da se selektovani user oboji moramo znati koji je selektovan dodajemo [selected] -->
+    @for (user of users; track user.id) {
+    <li>
+      <app-user [user]="user" [selected]="user.id===selectedUserId" (select)="onSelectUser($event)" />
+    </li>
+    }
+
+    <!-- <li *ngFor="let user of users">
+      <app-user [user]="user" [selected]="user.id" (select)="onSelectUser($event)" />
+    </li> -->
   </ul>
+
   <!-- <app-tasks [name]="selectedUser.name"/> -->
-  <app-tasks [name]="selectedUser ? selectedUser.name : ''" />
+  <!-- <app-tasks [name]="selectedUser ? selectedUser.name : ''" /> -->
+
+  <!-- Ovo postoji od verzije 17-->
+
+  @if (selectedUser) {
+  <!-- kako bi dodali da se selektovani user oboji moramo znati koji je selektovan -->
+  <app-tasks [userId]="selectedUser.id" [name]="selectedUser.name" />
+  }
+  <!-- Fallback -->
+  @else {
+  <p id="fallback">Select a user to see their tasks!</p>
+  }
+
+  <!-- ! da moze da  bude null, fallback naziv moze da bude bilo sta, samo je bitno da se nazivi slazu u else i ng-template -->
+  <!-- <app-tasks *ngIf="selectedUser; else fallback" [name]="selectedUser!.name" />
+  <ng-template #fallback>
+    <p id="fallback">Select a user to see their tasks!</p>
+  </ng-template> -->
 </main>

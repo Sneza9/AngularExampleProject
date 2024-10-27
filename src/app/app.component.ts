@@ -2,18 +2,22 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { DUMMY_USERS } from './dummy-user';
-import { TasksComponent } from './tasks/tasks.component';
+import { TasksComponent } from './tasks/tasks.component'; 
+// Strukturna direktiva 
+import { NgFor, NgIf } from '@angular/common'; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, UserComponent, TasksComponent],
+  imports: [HeaderComponent, UserComponent, TasksComponent, NgFor, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  users = DUMMY_USERS;
-  selectedUserId = 'u1';
+  users = DUMMY_USERS; 
+  //selectedUserId = 'u1';
+  //Sada nemamo selektovanog user-a 
+  selectedUserId ?:string;
 
   //vraca objekat user koji je kliknut i onda mozemo da uzmemo tu vredost name u html-u 
   get selectedUser(){

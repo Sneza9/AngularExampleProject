@@ -2,6 +2,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { input, output, computed } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-user';
+import { User } from './user.model';
 
 // random selektor
 // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
@@ -15,11 +16,12 @@ import { DUMMY_USERS } from '../dummy-user';
 
 // U Angular projektima vise se koristi interface 
 // Mozemo napraviti i inteface 
-interface User {
-  id:string;
-  avatar:string;
-  name:string;
-}
+// Ali je najbolje uvek dodati poseban model za to 
+// interface User {
+//   id:string;
+//   avatar:string;
+//   name:string;
+// }
 
 @Component({
   selector: 'app-user',
@@ -69,6 +71,7 @@ export class UserComponent {
   //Mozemo da napravimo jednog user-a umesto da imamo tri Input-a 
   // Ne kreiramo objekat ovde, vec samo tip koji ce se primiti 
   @Input({required:true}) user!:User;
+  @Input({required:true}) selected!:boolean;
 
   //Evet object moze da se koristi kao generic type kako bi Angular znao kog je tipa ono sto stize sa klijenta 
   //@Output() select = new EventEmitter<string>();
