@@ -1,5 +1,7 @@
 @if(isAddingTask){
-  <app-new-task (cancel)="onCancelAddTask()" (add)="onAddTask($event)"/>
+  <!-- <app-new-task [userId]="userId" (close)="onCancelAddTask()" (add)="onAddTask($event)"/> --> 
+  <!-- Za signal -->
+  <app-new-task [userId]="userId" (close)="onCloseAddTask()"/>
 }
 <section id="tasks">
   <header>
@@ -13,7 +15,8 @@
     @for (task of selectedUserTask; track task.id) {
     <li>
       <!-- ide task odozgo koji je po redu u for -->
-      <app-task [taks]="task" (complete)="onCompleteTask($event)"/>
+      <!-- <app-task [taks]="task" (complete)="onCompleteTask($event)"/> -->
+      <app-task [taks]="task"/>
     </li>
     }
   </ul>
